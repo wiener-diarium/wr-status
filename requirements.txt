@@ -1,0 +1,2 @@
+acdh-transkribus-utils
+tqdm
