@@ -1,4 +1,16 @@
 
+const transkribusUrl = "https://app.transkribus.eu/collection/"
+
+
+function makeTranskribusLink(cell) {
+    var row = cell.getRow().getData()
+    var colId = row.col_id
+    var docId = row.doc_id
+    var detailViewUrl = `${transkribusUrl}${colId}/doc/${docId}`
+    var linkToDetailView = `<a target="_blank" href="${detailViewUrl}">${cell.getData().doc_title}</a>`
+    return linkToDetailView
+}
+
 
 var table = new Tabulator("#example-table", {
     height: 600,
@@ -9,29 +21,13 @@ var table = new Tabulator("#example-table", {
             title: "ID", field: "col_id", width: 150
         },
         {
-            title: "Name", field: "doc_title"
+            title: "Name", field: "doc_title", headerFilter: "input", formatter: function (cell) {
+                return makeTranskribusLink(cell)
+            }
         },
-        // {
-        //     title: "Image", field: "doc_thumb",
-        //     formatter: function (cell) {
-        //         var value = cell.getValue();
-        //         return `<img src="${value}" class="img-thumbnail">`
-        //     }
-        // },
         {
-            title: "Transcribed", field: "doc_transcribed", formatter:"tickCross"
+            title: "Transcribed", field: "doc_transcribed", formatter: "tickCross"
         },
-        // {
-        //     title: "Transcribed", field: "doc_transcribed",
-        //     formatter: function (cell) {
-        //         var value = cell.getValue();
-        //         if (value) {
-        //             return `<span class="badge bg-success">yes</span>`
-        //         } else {
-        //             return `<span class="badge bg-danger">no</span>`
-        //         }
-        //     }
-        // },
         {
             title: "Pages", field: "pages"
         }
