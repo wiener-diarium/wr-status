@@ -23,7 +23,7 @@ jobs:
           mkdir ./html
           cp index.html ./html/index.html
           cp data.json ./html/data.json
-          cp table_config.js ./html/table_config.js
+          cp table_conf.js ./html/table_conf.js
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
