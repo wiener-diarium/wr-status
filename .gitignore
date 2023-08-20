@@ -160,5 +160,4 @@ cython_debug/
 #.idea/
 secret.env
 *.ipynb
-data.json
 html/
