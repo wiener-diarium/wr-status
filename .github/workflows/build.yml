@@ -7,8 +7,8 @@ jobs:
     name: Publish Transcription Status
     runs-on: ubuntu-latest
     env:
-      TR_USER: ${{ secrets.TR_USER }}
-      TR_PW: ${{ secrets.TR_PW }}
+      TR_USER: ${{ secrets.TRANSKRIBUS_PASSWORD }}
+      TR_PW: ${{ secrets.TRANSKRIBUS_USER }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
