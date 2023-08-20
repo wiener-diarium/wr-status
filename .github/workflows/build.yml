@@ -1,0 +1,31 @@
+name: Build and publish
+
+on: workflow_dispatch
+
+jobs:
+  build_pages:
+    name: Publish Transcription Status
+    runs-on: ubuntu-latest
+    env:
+      TR_USER: ${{ secrets.TR_USER }}
+      TR_PW: ${{ secrets.TR_PW }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - name: fetch the data
+        run: python fetch_data.py
+      - name: copy data
+        run: |
+          mkdir ./html
+          cp index.html ./html/index.html
+          cp data.json ./html/data.json
+          cp table_config.js ./html/table_config.js
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          publish_dir: ./html

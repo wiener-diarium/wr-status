@@ -16,9 +16,15 @@ var table = new Tabulator("#example-table", {
     height: 600,
     layout: "fitColumns",
     ajaxURL: 'data.json',
+    persistence:{
+        headerFilter: true,
+    },
     columns: [
         {
-            title: "ID", field: "col_id", width: 150
+            title: "Collection ID", field: "col_id", width: 150, headerFilter: "input"
+        },
+        {
+            title: "Document Id", field: "doc_id", width: 150, headerFilter: "input"
         },
         {
             title: "Name", field: "doc_title", headerFilter: "input", formatter: function (cell) {
@@ -26,10 +32,10 @@ var table = new Tabulator("#example-table", {
             }
         },
         {
-            title: "Transcribed", field: "doc_transcribed", formatter: "tickCross"
+            title: "Transcribed", field: "doc_transcribed", formatter: "tickCross", headerFilter:"tickCross", headerFilterParams:{"tristate":true},headerFilterEmptyCheck:function(value){return value === null}
         },
         {
-            title: "Pages", field: "pages"
+            title: "Pages", field: "pages", bottomCalc:"sum", headerFilter: "input"
         }
     ]
 });
