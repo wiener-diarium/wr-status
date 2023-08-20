@@ -24,6 +24,10 @@ jobs:
           cp index.html ./html/index.html
           cp data.json ./html/data.json
           cp table_conf.js ./html/table_conf.js
+      - name: Commit data
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Data update
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
